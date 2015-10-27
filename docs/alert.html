@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../dist/css/jquery.alert.css" rel="stylesheet">
+    <script type="application/javascript" src="../libs/jquery-1.8.2.js"></script>
+    <script type="application/javascript" src="../js/alert.js"></script>
+    <script>
+        $(function(){
+            //插件初始化
+            var jAlert = $('#prompt_window').jQueryAlert({
+                msg: 'Test',
+                btn_ok: false,
+                btn_okCancel: true
+            });
+
+            $('#btn_test').click(function(){
+                //调用显示
+                jAlert.show();
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div><input type="button" id="btn_test" value="显示"></div>
+
+<div id="prompt_window" class="openwindow" style="display:none">
+    <a class="close" href="javascript:void(0);">关闭</a>
+
+    <div class="openwindow_con">
+        <h4></h4>
+    </div>
+    <div class="openwindow_submit"><input id="prompt_btnOK" type="button" class="button_org_b button_70_30" value="确定"/><input
+            id="prompt_btnCancle" type="button" class="button_gray_b button_70_30" value="取消"/></div>
+</div>
+
+</body>
+</html>

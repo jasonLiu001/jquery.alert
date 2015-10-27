@@ -1,0 +1,80 @@
+.openwindow {
+    width: 270px;
+    padding: 20px;
+    border: 1px solid #dddddd;
+    background: #fbfbfb;
+    -webkit-box-shadow: 0 0 10px #dddddd;
+    -moz-box-shadow: 0 0 10px #dddddd;
+    box-shadow: 0 0 10px #dddddd;
+}
+
+.openwindow a.close {
+    display: block;
+    clear: both;
+    width: 20px;
+    height: 20px;
+    float: right;
+    background: url(../images/allbg.png) no-repeat 9px -92px;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+.openwindow_con {
+    clear: both;
+    overflow: hidden;
+    margin: 0 0 15px;
+    min-height: 40px;
+}
+
+.openwindow_con h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+
+.openwindow_con p.text {
+    font-size: 14px;
+    margin: 0 0 5px;
+}
+
+.openwindow_submit {
+    text-align: center;
+}
+
+.button_70_30 {
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+}
+
+/*按钮带边框input的形式*/
+.button_org_b {
+    background: url(../images/button_org_bg.png) repeat-x 0 0;
+    border: 1px solid #d68a41;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+    height: 28px;
+    line-height: 28px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.button_gray_b {
+    background: url(../images/button_gray_bg.png) repeat-x 0 0;
+    border: 1px solid #e1e1e1;
+    text-align: center;
+    font-weight: bold;
+    color: #999;
+    margin: 0 10px 0 0;
+    cursor: default;
+    height: 28px;
+    line-height: 28px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
