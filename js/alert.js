@@ -10,7 +10,7 @@
             msg: '消息内容',
             btn_ok: true,
             btn_okCancel: false,
-            okButtonHanlder: null,
+            okButtonHandler: null,
             cancelButtonHandler: null
         };
 
@@ -91,9 +91,9 @@
                     return;
                 } else if (that.options.btn_okCancel) {
                     closeAndCancelBtnHanlder();
-                    if (that.options.okButtonHanlder != null && typeof that.options.okButtonHanlder === 'function') {
+                    if (that.options.okButtonHandler != null && typeof that.options.okButtonHandler === 'function') {
                         $('#prompt_btnOK').click(function () {
-                            that.options.okButtonHanlder();
+                            that.options.okButtonHandler();
                             that.close();
                         });
                     }
