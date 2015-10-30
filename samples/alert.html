@@ -7,15 +7,19 @@
     <script type="application/javascript" src="../libs/jquery-1.8.2.js"></script>
     <script type="application/javascript" src="../js/alert.js"></script>
     <script>
-        $(function(){
+        $(function () {
             //插件初始化
             var jAlert = $('#prompt_window').jQueryAlert({
                 msg: 'Test',
                 btn_ok: false,
-                btn_okCancel: true
+                btn_okCancel: true,
+                okButtonHanlder: function () {
+                },
+                cancelButtonHandler: function () {
+                }
             });
 
-            $('#btn_test').click(function(){
+            $('#btn_test').click(function () {
                 //调用显示
                 jAlert.show();
             });

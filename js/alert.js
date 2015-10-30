@@ -9,13 +9,24 @@
         this.defaults = {
             msg: '消息内容',
             btn_ok: true,
-            btn_okCancel: false
+            btn_okCancel: false,
+            okButtonHanlder: null,
+            cancelButtonHandler: null
         };
 
         this.options = $.extend({}, this.defaults, opt);//用户选项设置
     };
 
     jQueryAlert.prototype = {
+        isValidOption: function () {
+            var that = this;
+            if (that.options.btn_ok && that.options.btn_okCancel) {
+                console.error('The value of btn_ok and btn_okCancel should not be true at the same time.');
+                return false;
+            } else {
+                return true;
+            }
+        },
         show: function () {
             var that = this;
 
@@ -37,7 +48,7 @@
                 $('body').append(mask);
             };
 
-            var showMsg = function () {
+            var changeAlertMsg = function () {
                 that.$element.find('h4').html(that.options.msg);
             };
 
@@ -66,34 +77,63 @@
                 }
             };
 
-            showMark();
-            showMsg();
-            showBtns();
-
-            //设置弹出层位置和样式
-            var top = ($(window).height() - this.$element.height()) / 2;
-            var left = ($(window).width() - this.$element.width()) / 2;
-            var scrollTop = $(document).scrollTop();
-            var scrollLeft = $(document).scrollLeft();
-            that.$element.css({
-                'position': 'absolute',
-                'z-index': 1010,
-                'top': top + scrollTop,
-                'left': left + scrollLeft
-            }).show();
-
             //弹出层按钮事件
             var registeButtonEvent = function () {
-                //弹出层 关闭、取消
-                $('.close,#prompt_btnCancle').click(function () {
-                    $('#global_mark').remove();
-                    that.$element.hide();
-                });
+                function closeAndCancelBtnHanlder() {
+                    //弹出层 关闭、取消
+                    $('.close,#prompt_btnCancle').click(function () {
+                        that.close();
+                    });
+                }
+
+                if (that.options.btn_ok) {//只显示确定按钮时
+                    closeAndCancelBtnHanlder();
+                    return;
+                } else if (that.options.btn_okCancel) {
+                    closeAndCancelBtnHanlder();
+                    if (that.options.okButtonHanlder != null && typeof that.options.okButtonHanlder === 'function') {
+                        $('#prompt_btnOK').click(function () {
+                            that.options.okButtonHanlder();
+                            that.close();
+                        });
+                    }
+                    if (that.options.cancelButtonHandler != null && typeof that.options.cancelButtonHandler === 'function') {
+                        $('#prompt_btnCancle').click(function () {
+                            that.options.cancelButtonHandler();
+                            that.close();
+                        });
+                    }
+                } else {
+                    closeAndCancelBtnHanlder();
+                    return;
+                }
             };
 
-            registeButtonEvent();
+            var showPromptWindow = function () {
+                //设置弹出层位置和样式
+                var top = ($(window).height() - that.$element.height()) / 2;
+                var left = ($(window).width() - that.$element.width()) / 2;
+                var scrollTop = $(document).scrollTop();
+                var scrollLeft = $(document).scrollLeft();
+                that.$element.css({
+                    'position': 'absolute',
+                    'z-index': 1010,
+                    'top': top + scrollTop,
+                    'left': left + scrollLeft
+                }).show();
+            };
+
+            if (!that.isValidOption()) return;
+
+            showMark();//显示遮罩
+            changeAlertMsg();//改变提示消息
+            showBtns();//显示指定按钮
+            registeButtonEvent();//注册按钮事件
+            showPromptWindow();//显示弹层
         },
         close: function () {
+            $('#global_mark').remove();
+            this.$element.hide();
         }
     };
 
